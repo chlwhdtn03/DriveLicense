@@ -15,6 +15,7 @@ import kotlin.random.Random
 class MainActivity : AppCompatActivity() {
 
     companion object {
+        var omr: HashMap<Int, ArrayList<Int>> = HashMap<Int, ArrayList<Int>>()
         var QuestionList : ArrayList<Quiz> = ArrayList<Quiz>()
         var nowQuestionIndex: Int = 0;
     }
@@ -69,7 +70,7 @@ class MainActivity : AppCompatActivity() {
 
     fun loadQuiz() {
 
-
+        omr.clear()
         QuestionList.clear()
 
         var random = Random

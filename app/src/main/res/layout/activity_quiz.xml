@@ -75,6 +75,7 @@
                 android:orientation="vertical"
                 android:paddingBottom="15dp"
                 android:weightSum="3"
+                android:id="@+id/quiz_toolbar"
                 android:gravity="bottom">
 
                 <LinearLayout

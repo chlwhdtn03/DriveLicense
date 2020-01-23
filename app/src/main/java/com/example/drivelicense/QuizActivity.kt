@@ -17,7 +17,8 @@ import kotlin.collections.HashMap
 
 class QuizActivity : AppCompatActivity() {
 
-    var omr: HashMap<Int, ArrayList<Int>> = HashMap<Int, ArrayList<Int>>()
+
+     var isReadOnly:Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,69 +26,82 @@ class QuizActivity : AppCompatActivity() {
 
         progress_quiz.max = MainActivity.QuestionList.size - 1
 
+        isReadOnly = intent.getIntExtra("READ", 0) == 1
+        if(!isReadOnly) {
+            previous_quiz.setOnClickListener {
+                if(MainActivity.nowQuestionIndex - 1 < 0)
+                    MainActivity.run {
+                        CustomToast.makeToast(applicationContext, "더 이상 뒤로갈 수 없습니다")
+                    }
+                    else
+                    MainActivity.run {
+                        initScreen(QuestionList.get(nowQuestionIndex - 1))
+                        nowQuestionIndex -= 1
+                        progress_quiz.progress = nowQuestionIndex
+                    }
+
+            }
+
+            next_quiz.setOnClickListener {
+                if(MainActivity.nowQuestionIndex + 1 >= MainActivity.QuestionList.size)
+                    MainActivity.run {
+                        AlertDialog.Builder(this@QuizActivity)
+                            .setTitle("채점하기")
+                            .setMessage("문제를 다 풀었으면 채점할 수 있습니다.")
+                            .setPositiveButton("채점하기") { dialog, id ->
+                                var resultarr = ArrayList<Int>()
+
+                                var corret = 0
+                                for(quiz in QuestionList) {
+                                    if(omr[quiz.id] == null)  {
+                                        resultarr.add(0)
+                                        continue
+                                    }
+
+                                    if(omr[quiz.id]!!.isEmpty()) {
+                                        resultarr.add(0)
+                                        continue
+                                    }
+
+                                    omr[quiz.id]!!.sort()
+                                    quiz.answer.sort()
+                                    if(omr[quiz.id]!! == quiz.answer) {
+                                        resultarr.add(1)
+                                        corret++
+                                    } else {
+                                        resultarr.add(0)
+                                    }
+                                }
+                                var intent = Intent(this@QuizActivity, ResultActivity::class.java)
+                                intent.putExtra("QuizAmount", QuestionList.size)
+                                intent.putExtra("Correct", corret)
+                                intent.putIntegerArrayListExtra("ResultArray", resultarr) // 채점 결과 배열
+                                finish()
+                                startActivity(intent)
+                            }
+                            .setNegativeButton("취소", null)
+                            .show()
+                    }
+                    else
+                    MainActivity.run {
+                        initScreen(QuestionList.get(nowQuestionIndex + 1))
+                        nowQuestionIndex += 1
+                        progress_quiz.progress = nowQuestionIndex
+                    }
+            }
+        } else {
+            quiz_toolbar.removeAllViews()
+        }
+
         quiz_hint.setOnClickListener {
             var nowQuiz: Quiz = MainActivity.QuestionList.get(MainActivity.nowQuestionIndex)
             AlertDialog.Builder(this)
                 .setTitle(nowQuiz.id.toString() + "번 문제 해설")
-                .setMessage(nowQuiz.hint + "\n정답 : ${nowQuiz.answer}")
+                .setMessage(nowQuiz.hint + if(isReadOnly) "\n정답 : ${nowQuiz.answer}" else "")
                 .setNegativeButton("닫기", null)
                 .show()
         }
 
-        previous_quiz.setOnClickListener {
-            if(MainActivity.nowQuestionIndex - 1 < 0)
-                MainActivity.run {
-                    CustomToast.makeToast(applicationContext, "더 이상 뒤로갈 수 없습니다")
-                }
-                else
-                MainActivity.run {
-                    initScreen(QuestionList.get(nowQuestionIndex - 1))
-                    nowQuestionIndex -= 1
-                    progress_quiz.progress = nowQuestionIndex
-                }
-
-        }
-
-        next_quiz.setOnClickListener {
-            if(MainActivity.nowQuestionIndex + 1 >= MainActivity.QuestionList.size)
-                MainActivity.run {
-                    AlertDialog.Builder(this@QuizActivity)
-                        .setTitle("채점하기")
-                        .setMessage("문제를 다 풀었으면 채점할 수 있습니다.")
-                        .setPositiveButton("채점하기") { dialog, id ->
-                            var resultarr = ArrayList<Int>()
-
-                            var corret = 0
-                            for(quiz in QuestionList) {
-                                if(omr[quiz.id] == null) {
-                                    resultarr.add(0)
-                                    continue
-                                }
-
-                                omr[quiz.id]!!.sort()
-                                quiz.answer.sort()
-                                if(omr[quiz.id]!! == quiz.answer) {
-                                    resultarr.add(1)
-                                    corret++
-                                }
-                            }
-                            var intent = Intent(this@QuizActivity, ResultActivity::class.java)
-                            intent.putExtra("QuizAmount", QuestionList.size)
-                            intent.putExtra("Correct", corret)
-                            intent.putIntegerArrayListExtra("ResultArray", resultarr) // 채점 결과 배열
-                            finish()
-                            startActivity(intent)
-                        }
-                        .setNegativeButton("취소", null)
-                        .show()
-                }
-                else
-                MainActivity.run {
-                    initScreen(QuestionList.get(nowQuestionIndex + 1))
-                    nowQuestionIndex += 1
-                    progress_quiz.progress = nowQuestionIndex
-                }
-        }
 
         initScreen(MainActivity.QuestionList.get(MainActivity.nowQuestionIndex))
 
@@ -103,7 +117,7 @@ class QuizActivity : AppCompatActivity() {
 
         quiz_title.text = quiz.id.toString() + "번 문제. " + quiz.title
         question_box.removeAllViewsInLayout()
-        for(count in 0..quiz.question.size-1) {
+        for(count in 0 until quiz.question.size) {
             var cb : CheckBox = CheckBox(baseContext)
             var hr:View = View(baseContext)
             hr.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 2)
@@ -116,27 +130,31 @@ class QuizActivity : AppCompatActivity() {
                 layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 1f)
                 question_box.addView(this)
 
-                if(omr.containsKey(quiz.id)) {
-                    var checks: ArrayList<Int> = omr[quiz.id]!!
+                if(MainActivity.omr.containsKey(quiz.id)) {
+                    var checks: ArrayList<Int> = MainActivity.omr[quiz.id]!!
                     if(checks.contains(count+1))
                         isChecked = true
                 }
 
 
                 setOnClickListener {
-                    if(isChecked) {
-                        var checks: ArrayList<Int>? = omr[quiz.id]
-                        if(checks == null)
-                            checks = ArrayList()
-                        checks.add(count+1)
-                        omr.put(quiz.id, checks)
+                    if(isReadOnly) {
+                        isChecked = !isChecked
                     } else {
-                        var checks: ArrayList<Int> = omr[quiz.id]!!
-                        checks.remove(count+1)
-                        if(checks.isEmpty()) {
-                            omr.remove(quiz.id)
+                        if (isChecked) {
+                            var checks: ArrayList<Int>? = MainActivity.omr[quiz.id]
+                            if (checks == null)
+                                checks = ArrayList()
+                            checks.add(count + 1)
+                            MainActivity.omr.put(quiz.id, checks)
                         } else {
-                            omr.put(quiz.id, checks)
+                            var checks: ArrayList<Int> = MainActivity.omr[quiz.id]!!
+                            checks.remove(count + 1)
+                            if (checks.isEmpty()) {
+                                MainActivity.omr.remove(quiz.id)
+                            } else {
+                                MainActivity.omr.put(quiz.id, checks)
+                            }
                         }
                     }
                 }

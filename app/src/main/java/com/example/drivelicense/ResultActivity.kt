@@ -1,6 +1,7 @@
 package com.example.drivelicense
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Typeface
 import android.support.v7.app.AppCompatActivity
@@ -59,7 +60,10 @@ class ResultActivity : AppCompatActivity() {
             checkbox.isChecked = (resultarr[cnt] == 1)
             checkbox.setOnClickListener {
                 checkbox.isChecked = !checkbox.isChecked
-                println("$cnt Clicked")
+                var quiz_intent: Intent = Intent(this, QuizActivity::class.java)
+                quiz_intent.putExtra("READ", 1)
+                MainActivity.nowQuestionIndex = cnt
+                startActivity(quiz_intent)
             }
             checkbox.setPadding(0, 0, 10, 0)
             checkbox.textSize = 15f
