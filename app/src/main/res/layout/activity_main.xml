@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="300px"
+        app:cardBackgroundColor="#07F5BC"
+        app:cardElevation="10dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/font"
+            android:padding="50px"
+            android:text="안녕하세요! 님"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"/>
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/main_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="600px"
+        android:overScrollMode="never">
+
+    </android.support.v4.view.ViewPager>
+
+    <!--
+    <android.support.v7.widget.CardView
+        android:id="@+id/Goto_TEST"
+        android:layout_width="match_parent"
+        android:layout_marginTop="50px"
+        app:cardElevation="15dp"
+        app:cardCornerRadius="20px"
+        android:layout_margin="50px"
+        app:cardBackgroundColor="#6AD6FF"
+        android:layout_height="500px">
+
+        <TextView
+            android:padding="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/font"
+            android:text="필기시험 연습하기"
+            android:textColor="#FFFFFF"
+            android:textSize="30sp"/>
+
+    </android.support.v7.widget.CardView>
+    -->
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardElevation="15dp"
+        app:cardCornerRadius="50px"
+        android:layout_marginBottom="-15dp"
+        app:cardBackgroundColor="#CFCFCF">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="20dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="내 포인트"
+                    android:fontFamily="@font/font"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/myPoint"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="right"
+                    android:text="0"
+                    android:fontFamily="@font/font"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp"/>
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="bottom"
+                android:weightSum="5"/>
+
+
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+</LinearLayout>

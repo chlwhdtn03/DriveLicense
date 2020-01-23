@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="2">
+
+
+        <LinearLayout
+            android:id="@+id/select_gear_auto"
+            android:layout_width="0dp"
+            android:layout_height="185dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:padding="20dp"
+                android:src="@drawable/auto"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/font"
+                android:textSize="20sp"
+                android:text="자동 기어"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/select_gear_semi"
+            android:layout_width="0dp"
+            android:layout_height="185dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:padding="20dp"
+                android:src="@drawable/semi"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/font"
+                android:textSize="20sp"
+                android:text="수동 기어"/>
+        </LinearLayout>
+
+
+
+
+
+</LinearLayout>
