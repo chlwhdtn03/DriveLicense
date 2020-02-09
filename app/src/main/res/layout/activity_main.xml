@@ -99,7 +99,39 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:gravity="bottom"
-                android:weightSum="5"/>
+                android:weightSum="3">
+
+                <com.example.drivelicense.CustomIconMenu
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    app:text="최근 본 시험"
+                    app:image="@drawable/recent"
+                    android:id="@+id/recent_quiz"
+                    app:textColor="#000000"/>
+
+                <com.example.drivelicense.CustomIconMenu
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:id="@+id/viewpdf"
+                    app:text="모든 문제"
+                    app:image="@drawable/viewpdf"
+                    app:textColor="#000000"/>
+
+                <com.example.drivelicense.CustomIconMenu
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    app:text="문제 정보"
+                    android:id="@+id/versionInfo"
+                    app:image="@drawable/pdfinfo"
+                    app:textColor="#000000"/>
+
+        </LinearLayout>
 
 
         </LinearLayout>

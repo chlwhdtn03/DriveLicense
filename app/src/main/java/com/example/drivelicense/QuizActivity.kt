@@ -117,6 +117,8 @@ class QuizActivity : AppCompatActivity() {
 
         quiz_title.text = quiz.id.toString() + "번 문제. " + quiz.title
         question_box.removeAllViewsInLayout()
+
+
         for(count in 0 until quiz.question.size) {
             var cb : CheckBox = CheckBox(baseContext)
             var hr:View = View(baseContext)

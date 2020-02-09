@@ -7,6 +7,7 @@ import android.graphics.Typeface
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.preference.PreferenceManager
+import android.support.v4.content.res.ResourcesCompat
 import android.text.Layout
 import android.view.Gravity
 import android.view.ViewGroup
@@ -14,6 +15,7 @@ import android.widget.CheckBox
 import android.widget.LinearLayout
 import com.itextpdf.text.Font
 import kotlinx.android.synthetic.main.activity_result.*
+import java.util.*
 
 class ResultActivity : AppCompatActivity() {
 
@@ -66,7 +68,8 @@ class ResultActivity : AppCompatActivity() {
                 startActivity(quiz_intent)
             }
             checkbox.setPadding(0, 0, 10, 0)
-            checkbox.textSize = 15f
+            checkbox.textSize = 14f
+            checkbox.typeface = ResourcesCompat.getFont(applicationContext, R.font.font)
             result_grid.addView(checkbox)
         }
 
@@ -75,6 +78,14 @@ class ResultActivity : AppCompatActivity() {
             putInt("Point", sf.getInt("Point", 0) + point)
             apply()
         }
+
+        sf = getSharedPreferences("Recent", Context.MODE_PRIVATE)
+        sf.edit().run {
+            var list = hashSetOf<String>("C "+quiz_correct.toString(),"T "+quiz_amount.toString(),"S "+score.toString())
+            putStringSet(Date().toString(), list)
+            apply()
+        }
+
 
 
 //        <!--                <CheckBox-->

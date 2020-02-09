@@ -12,6 +12,7 @@ import com.itextpdf.text.pdf.parser.PdfTextExtractor
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlin.random.Random
 
+
 class MainActivity : AppCompatActivity() {
 
     companion object {
@@ -54,6 +55,19 @@ class MainActivity : AppCompatActivity() {
                 })
             )
 
+        }
+
+        versionInfo.setOnClickListener {
+            CustomToast.makeToast(this, "최소 SDK 버전 : ${applicationContext.applicationInfo.minSdkVersion}\n시험 문제 : 2020 최신")
+        }
+
+        viewpdf.setOnClickListener {
+//            CustomToast.makeToast(this, "준비중입니다")
+            startActivity(Intent(this, ViewPDF::class.java))
+        }
+
+        recent_quiz.setOnClickListener {
+            startActivity(Intent(this, RecentQuiz::class.java))
         }
 
         cardAdapter = CardAdapter(cardlist, this)
@@ -126,7 +140,6 @@ class MainActivity : AppCompatActivity() {
         var question: ArrayList<String> = ArrayList<String>()
         var hint: String = ""
         var hintmode: Boolean = false
-
         for(i in pages) {
             LoadingDialog?.progress?.setProgress(LoadingDialog?.progress?.progress!! + 1, true)
             Text = PdfTextExtractor.getTextFromPage(reader, i)
@@ -186,7 +199,6 @@ class MainActivity : AppCompatActivity() {
                         num = Text[t].trim().toInt()
                         continue
                     }
-
                     // 9312부터 1번 동그라미
                     if(hintmode == false && (Text[t].trim().startsWith("해설") == false && (Text[t].contains(9312.toChar()) || Text[t].contains(9313.toChar()) || Text[t].contains(9314.toChar()) || Text[t].contains(9315.toChar()) || Text[t].contains(9316.toChar())
                         || Text[t+1].contains(9312.toChar()) || Text[t+1].contains(9313.toChar()) || Text[t+1].contains(9314.toChar()) || Text[t+1].contains(9315.toChar()) || Text[t+1].contains(9316.toChar())
@@ -240,7 +252,6 @@ class MainActivity : AppCompatActivity() {
                                 }
                             }
                         }
-
                         if(Text[t+1].trim().equals("해설") || Text[t].startsWith("해설") || hint.startsWith("해설")) {
                             hintmode = true
                             if(Text[t+1].trim().equals("해설"))
