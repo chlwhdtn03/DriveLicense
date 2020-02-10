@@ -15,6 +15,7 @@ import android.widget.CheckBox
 import android.widget.LinearLayout
 import com.itextpdf.text.Font
 import kotlinx.android.synthetic.main.activity_result.*
+import java.text.SimpleDateFormat
 import java.util.*
 
 class ResultActivity : AppCompatActivity() {
@@ -80,9 +81,33 @@ class ResultActivity : AppCompatActivity() {
         }
 
         sf = getSharedPreferences("Recent", Context.MODE_PRIVATE)
+
         sf.edit().run {
-            var list = hashSetOf<String>("C "+quiz_correct.toString(),"T "+quiz_amount.toString(),"S "+score.toString())
-            putStringSet(Date().toString(), list)
+            var list = hashSetOf<String>(
+                "C " + quiz_correct.toString(),
+                "T " + quiz_amount.toString(),
+                "S " + score.toString(),
+                "B " +
+                        when (Random().nextInt(4)) {
+                            0 -> {
+                                R.drawable.gradient_copper
+                            }
+                            1 -> {
+                                R.drawable.gradient_mango
+                            }
+                            2 -> {
+                                R.drawable.gradient_pink
+                            }
+                            3 -> {
+                                R.drawable.gradient_moonlight
+                            }
+                            else -> {
+                                R.drawable.gradient_copper
+                            }
+
+                        }
+            )
+            putStringSet(SimpleDateFormat("yyyyMMdd-HHmmss").format(Date()), list)
             apply()
         }
 

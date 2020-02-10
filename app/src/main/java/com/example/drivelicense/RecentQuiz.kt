@@ -21,7 +21,7 @@ class RecentQuiz : AppCompatActivity() {
         for(data in datas.all.toSortedMap()) {
             var value = (data.value as MutableSet<String>)
             var iterator = value.iterator()
-            scorecard = ScoreCard(0,0,0,1)
+            scorecard = ScoreCard(0, 0, 0, 0)
             while(iterator.hasNext()) {
                 var now = iterator.next()
                 if(now.startsWith("S")) {
@@ -35,10 +35,36 @@ class RecentQuiz : AppCompatActivity() {
                 if(now.startsWith("C")) {
                     scorecard.correct_amount = now.split("C ")[1].toInt()
                 }
+
+                if (now.startsWith("B")) {
+                    scorecard.gradient_id = now.split("B ")[1].toInt()
+                }
+            }
+            if (scorecard.gradient_id == 0) {
+                scorecard.gradient_id = when (Random().nextInt(4)) {
+                    0 -> {
+                        R.drawable.gradient_copper
+                    }
+                    1 -> {
+                        R.drawable.gradient_mango
+                    }
+                    2 -> {
+                        R.drawable.gradient_pink
+                    }
+                    3 -> {
+                        R.drawable.gradient_moonlight
+                    }
+                    else -> {
+                        R.drawable.gradient_copper
+                    }
+
+                }
             }
             list.add(scorecard)
 //            list.add(ScoreCard(iterator.next().toInt(), iterator.next().toInt(),iterator.next().toInt(), 1))
         }
+
+
         list.reverse()
         val mAdapter = ScoreCardAdapter(this, list)
         recentlist.adapter = mAdapter

@@ -38,7 +38,7 @@ class ScoreCardAdapter(val context:Context, val list: ArrayList<ScoreCard>) : Re
                 } else {
                     "대중교통 이용에는 많은 장점이 있습니다!"
                 }
-            background.setBackgroundResource(R.drawable.gradient_moonlight)
+            background.setBackgroundResource(data.gradient_id)
         }
 
     }
