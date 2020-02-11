@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:weightSum="10"
+    android:paddingVertical="10dp"
+    android:paddingHorizontal="15dp">
+
+    <TextView
+        android:layout_weight="3"
+        android:gravity="center"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:textSize="20sp"
+        android:text="서울특별시"
+        android:fontFamily="@font/font"
+        android:id="@+id/place_region"
+        android:textColor="#FFFFFF"
+        android:background="#D3D3D3" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_weight="6"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:fontFamily="@font/font"
+        android:id="@+id/place_name"
+        android:text="부산북부 운전면허시험장" />
+
+
+</LinearLayout>

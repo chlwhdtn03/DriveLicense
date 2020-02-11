@@ -101,7 +101,7 @@
                 android:gravity="bottom"
                 android:weightSum="3">
 
-                <com.example.drivelicense.CustomIconMenu
+                <com.example.drivelicense.custom.CustomIconMenu
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -111,7 +111,7 @@
                     android:id="@+id/recent_quiz"
                     app:textColor="#000000"/>
 
-                <com.example.drivelicense.CustomIconMenu
+                <com.example.drivelicense.custom.CustomIconMenu
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -121,7 +121,7 @@
                     app:image="@drawable/viewpdf"
                     app:textColor="#000000"/>
 
-                <com.example.drivelicense.CustomIconMenu
+                <com.example.drivelicense.custom.CustomIconMenu
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

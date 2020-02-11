@@ -1,15 +1,23 @@
 package com.example.drivelicense
 
-import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.support.v7.app.AppCompatActivity
 import android.view.View
+import com.example.drivelicense.dialog.LoadingDialog
+import com.example.drivelicense.custom.CustomToast
+import com.example.drivelicense.dialog.LicenseFindDialog
+import com.example.drivelicense.menucard.Card
+import com.example.drivelicense.menucard.CardAdapter
+import com.example.drivelicense.util.ZoomOutPageTransformer
 import com.itextpdf.text.pdf.PdfReader
 import com.itextpdf.text.pdf.parser.PdfTextExtractor
+import com.opencsv.CSVReader
 import kotlinx.android.synthetic.main.activity_main.*
+import java.io.InputStreamReader
+import java.lang.Exception
 import kotlin.random.Random
 
 
@@ -22,7 +30,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     var maxQuizAmount = 40
-    var LoadingDialog: CustomLoading? = null
+    var loadingDialogDialog: LoadingDialog? = null
     var cardlist: ArrayList<Card> = ArrayList<Card>()
     lateinit var cardAdapter: CardAdapter
 
@@ -31,28 +39,43 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+
         cardlist.run {
 
             add(
-                Card("필기시험 연습하기", "#6AD6FF", View.OnClickListener {
-                    LoadingDialog = CustomLoading(this@MainActivity, "문제를 불러옵니다...")
-                    LoadingDialog?.show()
-                    Thread(Runnable {
-                        loadQuiz()
-                    }).start()
-                })
+                Card(
+                    "필기시험 연습하기",
+                    "#6AD6FF",
+                    View.OnClickListener {
+                        loadingDialogDialog =
+                            LoadingDialog(
+                                this@MainActivity,
+                                "문제를 불러옵니다..."
+                            )
+                        loadingDialogDialog?.show()
+                        Thread(Runnable {
+                            loadQuiz()
+                        }).start()
+                    })
             )
 
             add(
-                Card("나에게 맞는 면허 찾기", "#EF7FEF", View.OnClickListener {
-                    LicenseFindDialog(this@MainActivity).show()
-                })
+                Card(
+                    "나에게 맞는 면허 찾기",
+                    "#EF7FEF",
+                    View.OnClickListener {
+                        LicenseFindDialog(this@MainActivity)
+                            .show()
+                    })
             )
 
             add(
-                Card("운전면허 시험장 보기", "#ABCDEF", View.OnClickListener {
-
-                })
+                Card(
+                    "운전면허 시험장 보기",
+                    "#ABCDEF",
+                    View.OnClickListener {
+                        startActivity(Intent(this@MainActivity, PlaceActivity::class.java))
+                    })
             )
 
         }
@@ -72,7 +95,10 @@ class MainActivity : AppCompatActivity() {
 
         cardAdapter = CardAdapter(cardlist, this)
         main_viewpager.adapter = cardAdapter
-        main_viewpager.setPageTransformer(true, ZoomOutPageTransformer())
+        main_viewpager.setPageTransformer(
+            true,
+            ZoomOutPageTransformer()
+        )
         cardAdapter.notifyDataSetChanged()
     }
 
@@ -132,7 +158,7 @@ class MainActivity : AppCompatActivity() {
         }
         pages.add(163)
 
-        LoadingDialog?.progress?.max = pages.size
+        loadingDialogDialog?.progress?.max = pages.size
 
         var title: String = ""
         var num: Int = 0
@@ -141,7 +167,10 @@ class MainActivity : AppCompatActivity() {
         var hint: String = ""
         var hintmode: Boolean = false
         for(i in pages) {
-            LoadingDialog?.progress?.setProgress(LoadingDialog?.progress?.progress!! + 1, true)
+            loadingDialogDialog?.progress?.setProgress(
+                loadingDialogDialog?.progress?.progress!! + 1,
+                true
+            )
             Text = PdfTextExtractor.getTextFromPage(reader, i)
                 .replace("문제은행","")
                 .replace("1종, 2종 학과시험 문제은행","")
@@ -295,7 +324,7 @@ class MainActivity : AppCompatActivity() {
         while(QuestionList.size > maxQuizAmount) {
             QuestionList.removeAt(random.nextInt(QuestionList.size))
         }
-        LoadingDialog?.close()
+        loadingDialogDialog?.close()
         nowQuestionIndex = 0;
         var intent: Intent = Intent(this, QuizActivity::class.java)
         intent.putExtra("title", QuestionList.get(nowQuestionIndex).title)

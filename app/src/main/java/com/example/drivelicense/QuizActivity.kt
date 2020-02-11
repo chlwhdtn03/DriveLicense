@@ -1,19 +1,15 @@
 package com.example.drivelicense
 
 import android.app.AlertDialog
-import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.preference.CheckBoxPreference
-import android.support.v4.widget.TextViewCompat
 import android.view.View
 import android.widget.*
+import com.example.drivelicense.custom.CustomToast
 import kotlinx.android.synthetic.main.activity_quiz.*
-import java.util.*
 import kotlin.collections.ArrayList
-import kotlin.collections.HashMap
 
 class QuizActivity : AppCompatActivity() {
 

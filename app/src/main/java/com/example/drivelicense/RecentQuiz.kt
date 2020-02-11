@@ -4,6 +4,8 @@ import android.content.Context
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import com.example.drivelicense.scorecard.ScoreCard
+import com.example.drivelicense.scorecard.ScoreCardAdapter
 import kotlinx.android.synthetic.main.activity_recent_quiz.*
 import java.util.*
 import kotlin.collections.ArrayList
@@ -66,7 +68,8 @@ class RecentQuiz : AppCompatActivity() {
 
 
         list.reverse()
-        val mAdapter = ScoreCardAdapter(this, list)
+        val mAdapter =
+            ScoreCardAdapter(this, list)
         recentlist.adapter = mAdapter
 
         val lm = LinearLayoutManager(this)
