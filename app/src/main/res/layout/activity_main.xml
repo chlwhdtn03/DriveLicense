@@ -117,7 +117,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:id="@+id/viewpdf"
-                    app:text="모든 문제"
+                    app:text="원본 문제"
                     app:image="@drawable/viewpdf"
                     app:textColor="#000000"/>
 

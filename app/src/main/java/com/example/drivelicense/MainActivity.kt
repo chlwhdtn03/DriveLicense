@@ -86,7 +86,10 @@ class MainActivity : AppCompatActivity() {
 
         viewpdf.setOnClickListener {
 //            CustomToast.makeToast(this, "준비중입니다")
-            startActivity(Intent(this, ViewPDF::class.java))
+//            startActivity(Intent(this, ViewPDF::class.java))
+            startActivity(Intent(this, QuizActivity::class.java).also {
+                it.putExtra("VIEW", 1)
+            })
         }
 
         recent_quiz.setOnClickListener {
@@ -120,8 +123,8 @@ class MainActivity : AppCompatActivity() {
         var pages: ArrayList<Int> = ArrayList()
         var n =  2
 
-        // 2~14페이지 법? 관련 (2장에서 랜덤 뽑기)
-        for(i in 0..1) {
+        // 2~14페이지 법? 관련 (3장에서 랜덤 뽑기)
+        for (i in 0..2) {
             cache = random.nextInt(2, 15)
             while(pages.contains(cache)) {
                 cache = random.nextInt(2, 15)
@@ -129,8 +132,8 @@ class MainActivity : AppCompatActivity() {
             println("랜덤 : ${cache}")
             pages.add(cache)
         }
-        // 15~26페이지 (2장에서 랜덤 뽑기)
-        for(i in 0..1) {
+        // 15~26페이지 (3장에서 랜덤 뽑기)
+        for (i in 0..2) {
             cache = random.nextInt(15, 27)
             while(pages.contains(cache)) {
                 cache = random.nextInt(15, 27)
@@ -147,8 +150,8 @@ class MainActivity : AppCompatActivity() {
             println("랜덤 : ${cache}")
             pages.add(cache)
         }
-        //98~203페이지 (10장에서 뽑기)
-        for(i in 0..10) {
+        //98~203페이지 (5장에서 뽑기)
+        for (i in 0..4) {
             cache = random.nextInt(98, 204)
             while(pages.contains(cache)) {
                 cache = random.nextInt(98, 204)
@@ -156,7 +159,15 @@ class MainActivity : AppCompatActivity() {
             println("랜덤 : ${cache}")
             pages.add(cache)
         }
-        pages.add(163)
+        //204~239페이지 (3장 뽑기)
+        for (i in 0..2) {
+            cache = random.nextInt(204, 240)
+            while (pages.contains(cache)) {
+                cache = random.nextInt(204, 240)
+            }
+            println("랜덤 : ${cache}")
+            pages.add(cache)
+        }
 
         loadingDialogDialog?.progress?.max = pages.size
 
@@ -320,10 +331,13 @@ class MainActivity : AppCompatActivity() {
             }
         }
         reader.close()
-        QuestionList.shuffle()
+        System.out.println("생성된 문제의 개수 : ${QuestionList.size} || 최대 문제 개수 : ${maxQuizAmount}...")
+        var temp: Int;
         while(QuestionList.size > maxQuizAmount) {
-            QuestionList.removeAt(random.nextInt(QuestionList.size))
+            QuestionList.removeAt(random.nextInt(QuestionList.size).also { temp = it })
+            System.out.println("LIST 내 ${temp} 번 문제 삭제")
         }
+        QuestionList.shuffle()
         loadingDialogDialog?.close()
         nowQuestionIndex = 0;
         var intent: Intent = Intent(this, QuizActivity::class.java)
