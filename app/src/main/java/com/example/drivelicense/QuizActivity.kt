@@ -5,6 +5,8 @@ import android.content.Intent
 import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.widget.CardView
+import android.text.Layout
 import android.view.View
 import android.widget.*
 import com.example.drivelicense.custom.CustomToast
@@ -173,15 +175,49 @@ class QuizActivity : AppCompatActivity() {
         for(count in 0 until quiz.question.size) {
             var cb : CheckBox = CheckBox(baseContext)
             var hr:View = View(baseContext)
+            var cv: CardView = CardView(baseContext)
             hr.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 2)
             hr.setBackgroundColor(Color.parseColor("#000000"))
-            cb.run {
-                text = quiz.question[count].substring(2)
-                textSize = 16F
 
-                setTextColor(Color.parseColor("#000000"))
-                layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 1f)
-                question_box.addView(this)
+            cv.layoutParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                1f
+            ).also {
+                it.bottomMargin = 16
+                it.topMargin = 16
+                it.leftMargin = 30
+                it.rightMargin = 30
+            }
+
+            cv.cardElevation = 15f
+
+            /*
+
+                <CheckBox
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="테스트 입니다"
+                    android:checked="true"
+                    android:button="null"
+                    android:background="@drawable/quiz_checkbox"/>
+
+             */
+            cb.run {
+                buttonDrawable = null
+                background = getDrawable(R.drawable.quiz_checkbox)
+                setTextColor(getColorStateList(R.color.quiz_checkbox_text))
+                text = quiz.question[count].substring(2).trim()
+                textSize = 16F
+                textAlignment = LinearLayout.TEXT_ALIGNMENT_CENTER
+
+
+                layoutParams = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.MATCH_PARENT
+                )
+                cv.addView(this)
+                question_box.addView(cv)
 
                 if(MainActivity.omr.containsKey(quiz.id)) {
                     var checks: ArrayList<Int> = MainActivity.omr[quiz.id]!!

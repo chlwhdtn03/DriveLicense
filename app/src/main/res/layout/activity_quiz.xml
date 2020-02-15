@@ -8,25 +8,26 @@
     android:orientation="vertical"
     android:weightSum="10">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="2"
-        android:fontFamily="@font/font"
-        android:text="문제. 문제설명"
-        android:textSize="20sp"
-        android:layout_margin="15dp"
-        android:autoSizeTextType="uniform"
-        android:id="@+id/quiz_title"/>
+        android:layout_weight="3"
+        android:background="@drawable/gradient_moonlight">
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/font"
+            android:gravity="center"
+            android:text="문제. 문제설명"
 
-    <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="6.5"
-        app:cardCornerRadius="30dp"
-        android:layout_margin="15dp"
-        app:cardElevation="15dp">
+            android:textSize="20sp"
+            android:layout_margin="15dp"
+            android:textColor="#FFFFFF"
+            android:id="@+id/quiz_title" />
+
+    </LinearLayout>
+
 
         <ImageButton
             android:layout_gravity="right"
@@ -42,9 +43,9 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="5.5"
             android:orientation="vertical"
-            android:layout_marginVertical="30dp"
             android:weightSum="4">
 
 
@@ -56,11 +57,11 @@
                 android:orientation="vertical"
                 android:id="@+id/question_box">
 
+
             </LinearLayout>
 
         </LinearLayout>
 
-    </android.support.v7.widget.CardView>
 
     <LinearLayout
         android:layout_width="match_parent"
