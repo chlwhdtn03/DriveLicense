@@ -227,23 +227,25 @@ class QuizActivity : AppCompatActivity() {
                 }
 
 
-                setOnClickListener {
-                    if(isReadOnly) {
-                        isChecked = !isChecked
-                    } else {
-                        if (isChecked) {
-                            var checks: ArrayList<Int>? = MainActivity.omr[quiz.id]
-                            if (checks == null)
-                                checks = ArrayList()
-                            checks.add(count + 1)
-                            MainActivity.omr.put(quiz.id, checks)
+                if (!isViewOnly) {
+                    setOnClickListener {
+                        if (isReadOnly) {
+                            isChecked = !isChecked
                         } else {
-                            var checks: ArrayList<Int> = MainActivity.omr[quiz.id]!!
-                            checks.remove(count + 1)
-                            if (checks.isEmpty()) {
-                                MainActivity.omr.remove(quiz.id)
-                            } else {
+                            if (isChecked) {
+                                var checks: ArrayList<Int>? = MainActivity.omr[quiz.id]
+                                if (checks == null)
+                                    checks = ArrayList()
+                                checks.add(count + 1)
                                 MainActivity.omr.put(quiz.id, checks)
+                            } else {
+                                var checks: ArrayList<Int> = MainActivity.omr[quiz.id]!!
+                                checks.remove(count + 1)
+                                if (checks.isEmpty()) {
+                                    MainActivity.omr.remove(quiz.id)
+                                } else {
+                                    MainActivity.omr.put(quiz.id, checks)
+                                }
                             }
                         }
                     }
