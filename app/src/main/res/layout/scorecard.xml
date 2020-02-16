@@ -13,7 +13,7 @@
         app:cardElevation="10dp">
 
         <LinearLayout
-            android:background="@drawable/gradient_moonlight"
+            android:background="@drawable/gradient_pink"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/cardbackground"

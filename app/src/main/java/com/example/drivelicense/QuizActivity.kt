@@ -168,7 +168,8 @@ class QuizActivity : AppCompatActivity() {
 
     fun initScreen(quiz: Quiz) {
 
-        quiz_title.text = quiz.id.toString() + "번 문제. " + quiz.title
+        quiz_num.text = quiz.id.toString() + "번 문제"
+        quiz_title.text = quiz.title
         question_box.removeAllViewsInLayout()
 
 
@@ -190,7 +191,7 @@ class QuizActivity : AppCompatActivity() {
                 it.rightMargin = 30
             }
 
-            cv.cardElevation = 15f
+            cv.cardElevation = 10f
 
             /*
 
@@ -210,7 +211,7 @@ class QuizActivity : AppCompatActivity() {
                 text = quiz.question[count].substring(2).trim()
                 textSize = 16F
                 textAlignment = LinearLayout.TEXT_ALIGNMENT_CENTER
-
+                setPadding(20, 0, 20, 0)
 
                 layoutParams = LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT,

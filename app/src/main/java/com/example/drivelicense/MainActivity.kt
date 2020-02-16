@@ -45,6 +45,7 @@ class MainActivity : AppCompatActivity() {
             add(
                 Card(
                     "필기시험 연습하기",
+                    "문제를 랜덤으로 풀어봅니다",
                     "#6AD6FF",
                     View.OnClickListener {
                         loadingDialogDialog =
@@ -61,7 +62,8 @@ class MainActivity : AppCompatActivity() {
 
             add(
                 Card(
-                    "나에게 맞는 면허 찾기",
+                    "면허 찾기",
+                    "나에게 맞는 면허 찾기 ",
                     "#EF7FEF",
                     View.OnClickListener {
                         LicenseFindDialog(this@MainActivity)
@@ -71,10 +73,15 @@ class MainActivity : AppCompatActivity() {
 
             add(
                 Card(
+                    "시험장 리스트 보기",
                     "운전면허 시험장 보기",
                     "#ABCDEF",
                     View.OnClickListener {
-                        startActivity(Intent(this@MainActivity, PlaceActivity::class.java))
+                        startActivity(
+                            Intent(this@MainActivity, PlaceActivity::class.java).addFlags(
+                                Intent.FLAG_ACTIVITY_SINGLE_TOP
+                            )
+                        )
                     })
             )
 
@@ -98,10 +105,10 @@ class MainActivity : AppCompatActivity() {
 
         cardAdapter = CardAdapter(cardlist, this)
         main_viewpager.adapter = cardAdapter
-        main_viewpager.setPageTransformer(
-            true,
-            ZoomOutPageTransformer()
-        )
+//        main_viewpager.setPageTransformer(
+//            true,
+//            ZoomOutPageTransformer()
+//        )
         cardAdapter.notifyDataSetChanged()
     }
 

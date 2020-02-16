@@ -25,7 +25,9 @@ class CardAdapter(list: ArrayList<Card>, context: Context) : PagerAdapter() {
         var view: View = inflater.inflate(R.layout.main_card, null)
 
         view.card_title.text = list.get(position).title
+        view.card_description.text = list.get(position).description
         view.card.setCardBackgroundColor(Color.parseColor(list.get(position).color))
+        view.card_button.setCardBackgroundColor(Color.parseColor(list.get(position).color))
         view.card.setOnClickListener(list.get(position).onClick)
 
         container.addView(view)

@@ -12,27 +12,54 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="3"
-        android:background="@drawable/gradient_moonlight">
+        android:background="#FFFFFF">
 
-        <TextView
+        <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fontFamily="@font/font"
-            android:gravity="center"
-            android:text="문제. 문제설명"
+            app:cardElevation="15dp"
+            android:layout_marginBottom="10dp">
 
-            android:textSize="20sp"
-            android:layout_margin="15dp"
-            android:textColor="#FFFFFF"
-            android:id="@+id/quiz_title" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/font"
+                    android:text="1번 문제"
+
+                    android:textSize="25sp"
+                    android:layout_margin="15dp"
+                    android:textColor="#404961"
+                    android:id="@+id/quiz_num" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/font"
+                    android:text="문제설명"
+                    android:textSize="20sp"
+                    android:layout_marginHorizontal="15dp"
+                    android:layout_marginVertical="5dp"
+                    android:textColor="#000000"
+                    android:id="@+id/quiz_title" />
+
+
+            </LinearLayout>
+
+
+        </android.support.v7.widget.CardView>
 
     </LinearLayout>
 
 
         <ImageButton
             android:layout_gravity="right"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_marginTop="5dp"
             android:layout_marginRight="5dp"
             android:adjustViewBounds="true"
@@ -75,9 +102,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:cardElevation="15dp"
-            app:cardBackgroundColor="#888888"
             android:layout_marginBottom="-15dp"
-            app:cardCornerRadius="15dp"
             android:layout_weight="3">
 
             <LinearLayout
@@ -110,7 +135,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="2"
-                    android:background="#888888"
                     android:orientation="horizontal"
                     android:weightSum="2">
 
