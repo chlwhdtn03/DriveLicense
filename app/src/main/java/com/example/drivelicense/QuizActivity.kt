@@ -18,10 +18,19 @@ import kotlin.random.Random
 
 class QuizActivity : AppCompatActivity() {
 
+    var isHint: Boolean = false
 
     var isReadOnly: Boolean = false
     var isViewOnly: Boolean = false
     var page: Int = 2
+
+    override fun onBackPressed() {
+        if (isReadOnly || isViewOnly) {
+            super.onBackPressed()
+        } else {
+            CustomToast.makeToast(this, "뒤로갈 수 없습니다")
+        }
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,6 +39,7 @@ class QuizActivity : AppCompatActivity() {
 
         progress_quiz.max = MainActivity.QuestionList.size - 1
 
+        isHint = intent.getBooleanExtra("isHint", true)
         isReadOnly = intent.getIntExtra("READ", 0) == 1
         isViewOnly = intent.getIntExtra("VIEW", 0) == 1
 
@@ -150,13 +160,18 @@ class QuizActivity : AppCompatActivity() {
 
         }
 
-        quiz_hint.setOnClickListener {
-            var nowQuiz: Quiz = MainActivity.QuestionList.get(MainActivity.nowQuestionIndex)
-            AlertDialog.Builder(this)
-                .setTitle(nowQuiz.id.toString() + "번 문제 해설")
-                .setMessage(nowQuiz.hint + if (isReadOnly) "\n정답 : ${nowQuiz.answer}" else "")
-                .setNegativeButton("닫기", null)
-                .show()
+
+        if (isHint) {
+            quiz_hint.setOnClickListener {
+                var nowQuiz: Quiz = MainActivity.QuestionList.get(MainActivity.nowQuestionIndex)
+                AlertDialog.Builder(this)
+                    .setTitle(nowQuiz.id.toString() + "번 문제 해설")
+                    .setMessage(nowQuiz.hint + if (isReadOnly) "\n정답 : ${nowQuiz.answer}" else "")
+                    .setNegativeButton("닫기", null)
+                    .show()
+            }
+        } else {
+            quiz_hint.visibility = View.GONE
         }
 
     }

@@ -44,8 +44,26 @@ class MainActivity : AppCompatActivity() {
 
             add(
                 Card(
-                    "필기시험 연습하기",
+                    "필기시험 시험보기",
                     "문제를 랜덤으로 풀어봅니다",
+                    "#A1AABB",
+                    View.OnClickListener {
+                        loadingDialogDialog =
+                            LoadingDialog(
+                                this@MainActivity,
+                                "문제를 불러옵니다..."
+                            )
+                        loadingDialogDialog?.show()
+                        Thread(Runnable {
+                            loadQuiz(false)
+                        }).start()
+                    })
+            )
+
+            add(
+                Card(
+                    "필기시험 연습하기",
+                    "힌트와 함께 문제를\n랜덤으로 풀어봅니다",
                     "#6AD6FF",
                     View.OnClickListener {
                         loadingDialogDialog =
@@ -55,7 +73,7 @@ class MainActivity : AppCompatActivity() {
                             )
                         loadingDialogDialog?.show()
                         Thread(Runnable {
-                            loadQuiz()
+                            loadQuiz(true)
                         }).start()
                     })
             )
@@ -115,10 +133,10 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() { // 액티비티가 맨 앞으로 올때
         super.onResume()
         var sf : SharedPreferences = PreferenceManager.getDefaultSharedPreferences(applicationContext)
-        myPoint.text = String.format("%,d 점", sf.getInt("Point", 0))
+        myPoint.text = String.format("%,d 포인트", sf.getInt("Point", 0))
     }
 
-    fun loadQuiz() {
+    fun loadQuiz(isHintEnable: Boolean) {
 
         omr.clear()
         QuestionList.clear()
@@ -348,6 +366,7 @@ class MainActivity : AppCompatActivity() {
         loadingDialogDialog?.close()
         nowQuestionIndex = 0;
         var intent: Intent = Intent(this, QuizActivity::class.java)
+        intent.putExtra("isHint", isHintEnable)
         intent.putExtra("title", QuestionList.get(nowQuestionIndex).title)
         intent.putExtra("num", QuestionList.get(nowQuestionIndex).id)
         intent.putStringArrayListExtra("question", QuestionList.get(nowQuestionIndex).question)
