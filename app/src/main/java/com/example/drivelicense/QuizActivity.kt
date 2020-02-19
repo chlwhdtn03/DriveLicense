@@ -3,11 +3,14 @@ package com.example.drivelicense
 import android.app.AlertDialog
 import android.content.Intent
 import android.graphics.Color
+import android.graphics.Typeface
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.CardView
 import android.text.Layout
+import android.view.Gravity
 import android.view.View
+import android.view.ViewGroup
 import android.widget.*
 import com.example.drivelicense.custom.CustomToast
 import com.itextpdf.text.pdf.PdfReader
@@ -113,6 +116,29 @@ class QuizActivity : AppCompatActivity() {
             } else {
                 // 읽기 전용
                 quiz_toolbar.removeAllViews()
+                var tv: TextView = TextView(this)
+                tv.textSize = 18F
+                tv.setTextColor(Color.parseColor("#000000"))
+                tv.text =
+                    "해당 문제의 정답은 " + MainActivity.QuestionList[MainActivity.nowQuestionIndex].answer.run {
+                        when (size) {
+                            1 -> {
+                                "${get(0)}번 입니다"
+                            }
+                            2 -> {
+                                "${get(0)}번과 ${get(1)}번 입니다"
+                            }
+                            else -> {
+                                "오류로 인해 알 수 없습니다"
+                            }
+                        }
+                    }
+                tv.gravity = Gravity.CENTER
+                tv.layoutParams = ViewGroup.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.MATCH_PARENT
+                )
+                quiz_toolbar.addView(tv)
             }
 
             initScreen(MainActivity.QuestionList.get(MainActivity.nowQuestionIndex))

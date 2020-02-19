@@ -41,7 +41,7 @@
                     android:layout_height="match_parent"
                     android:fontFamily="@font/font"
                     android:text="문제설명"
-                    android:textSize="20sp"
+                    android:textSize="15sp"
                     android:layout_marginHorizontal="15dp"
                     android:layout_marginVertical="5dp"
                     android:textColor="#000000"
@@ -94,6 +94,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1.5"
+        android:layout_marginTop="10dp"
         android:weightSum="3"
         android:orientation="vertical"
         android:gravity="bottom">
@@ -138,32 +139,45 @@
                     android:orientation="horizontal"
                     android:weightSum="2">
 
-                    <Button
-                        android:fontFamily="@font/font"
-                        android:textSize="15sp"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="match_parent"
-                        android:elevation="15dp"
-                        android:id="@+id/previous_quiz"
-                        android:layout_marginHorizontal="10dp"
-                        android:layout_marginVertical="5dp"
-                        android:background="@drawable/button_light"
-                        android:textColor="#000000"
-                        android:text="이전 문제"/>
 
-                    <Button
-                        android:fontFamily="@font/font"
-                        android:textSize="15sp"
+                    <android.support.v7.widget.CardView
                         android:layout_width="0dp"
-                        android:layout_weight="1"
                         android:layout_height="match_parent"
-                        android:id="@+id/next_quiz"
-                        android:layout_marginHorizontal="10dp"
-                        android:layout_marginVertical="5dp"
-                        android:background="@drawable/button_light"
-                        android:textColor="#000000"
-                        android:text="다음 문제"/>
+                        android:layout_weight="1"
+                        android:layout_margin="10dp"
+                        app:cardElevation="5dp">
+
+                        <TextView
+                            android:fontFamily="@font/font"
+                            android:textSize="15sp"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:id="@+id/previous_quiz"
+                            android:gravity="center"
+                            android:textColor="#000000"
+                            android:text="이전 문제" />
+
+                    </android.support.v7.widget.CardView>
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:layout_margin="10dp"
+                        app:cardElevation="5dp">
+
+                        <TextView
+                            android:fontFamily="@font/font"
+                            android:textSize="15sp"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:id="@+id/next_quiz"
+                            android:gravity="center"
+                            android:textColor="#000000"
+                            android:text="다음 문제" />
+
+                    </android.support.v7.widget.CardView>
+
 
                 </LinearLayout>
 

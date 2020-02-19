@@ -28,7 +28,7 @@
                 android:gravity="top|center"
                 android:text="이곳엔 설명이 들어갑니다!"
                 android:textColor="#FFFFFF"
-                android:textSize="25sp"/>
+                android:textSize="20sp" />
 
 
             <LinearLayout
@@ -52,7 +52,7 @@
                         android:layout_height="match_parent"
                         android:layout_margin="10dp"
                         android:fontFamily="@font/font"
-                        android:textSize="25sp"
+                        android:textSize="15sp"
                         android:id="@+id/card_title"
                         android:textColor="#FFFFFF"
                         android:text="필기시험 보러가기" />

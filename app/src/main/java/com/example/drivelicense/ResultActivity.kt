@@ -69,7 +69,7 @@ class ResultActivity : AppCompatActivity() {
                 startActivity(quiz_intent)
             }
             checkbox.setPadding(0, 0, 10, 0)
-            checkbox.textSize = 14f
+            checkbox.textSize = 10f
             checkbox.typeface = ResourcesCompat.getFont(applicationContext, R.font.font)
             result_grid.addView(checkbox)
         }

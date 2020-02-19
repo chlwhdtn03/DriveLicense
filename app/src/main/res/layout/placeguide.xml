@@ -160,7 +160,7 @@
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/font"
                 android:gravity="center"
-                android:text="학원 불법 연수에 주의하세요\n카드 결제를 꺼려하거나 선불을 강요하며\n조수석에 보조브레이크 없이 봉으로 브레이크를 제어합니다\n사고 발생시 보험이 불가능하며\n 비용을 지불했다면 보상받을 수 없습니다"
+                android:text="학원 불법 연수에 주의하세요\n사고 발생시 보험이 불가능하며\n 비용을 지불했다면 보상받을 수 없습니다"
                 android:textColor="#FF0000"
                 android:textSize="15sp" />
 

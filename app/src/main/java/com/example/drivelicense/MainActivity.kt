@@ -40,6 +40,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
 
+
         cardlist.run {
 
             add(
@@ -104,6 +105,7 @@ class MainActivity : AppCompatActivity() {
             )
 
         }
+
 
         versionInfo.setOnClickListener {
             CustomToast.makeToast(this, "최소 SDK 버전 : ${applicationContext.applicationInfo.minSdkVersion}\n시험 문제 : 2020 최신")
