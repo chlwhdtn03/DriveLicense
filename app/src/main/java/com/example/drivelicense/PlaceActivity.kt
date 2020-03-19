@@ -16,7 +16,7 @@ import java.lang.Exception
 
 class PlaceActivity : AppCompatActivity() {
 
-    val list: ArrayList<Place> = ArrayList()
+    var list: ArrayList<Place> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,7 +57,6 @@ class PlaceActivity : AppCompatActivity() {
         }
 
         reader.close()
-
         val mAdapter = PlaceAdapter(this, list)
         placelist.adapter = mAdapter
 

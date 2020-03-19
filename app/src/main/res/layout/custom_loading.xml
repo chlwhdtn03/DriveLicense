@@ -45,7 +45,17 @@
         </LinearLayout>
 
 
-        <ProgressBar
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:fontFamily="@font/font"
+                android:gravity="center"
+                android:text="안내. 그림 문항은 아직 나오지 않습니다!">
+
+            </TextView>
+
+            <ProgressBar
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/loading_progress"

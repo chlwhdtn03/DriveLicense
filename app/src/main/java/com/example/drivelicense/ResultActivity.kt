@@ -29,25 +29,25 @@ class ResultActivity : AppCompatActivity() {
         var quiz_correct = intent.getIntExtra("Correct",0)
         var score = ((quiz_correct.toFloat() / quiz_amount.toFloat()) * 100).toInt()
         result_score.text = "${score} 점"
+        point = score
         result_msg.text =
-            if(score > 90) {
-                point = 1000
+            if (score >= 90) {
                 "무조건 합격하실 수 있을겁니다!"
-            } else if(score > 80) {
-                point = 500
+            } else if (score >= 80) {
                 "1,2종 모두 합격을 예상합니다!"
-            } else if(score > 70) {
-                point = 100
-                "1,2종 보통 합격할 수도 있습니다.(강남운전면허연습장 한정)"
-            } else if(score > 60) {
-                point = 50
+            } else if (score >= 70) {
+                "나머지 10점은 운에 맡겨봅시다!"
+            } else if (score >= 60) {
                 "2종 보통이라면 합격할 수도 있습니다.\n(강남운전면허연습장 한정)"
-            } else if(score > 50) {
-                point = 10
+            } else if (score >= 50) {
                 "좀만 더 연습하세요"
+            } else if (score >= 30) {
+                "이제 막 시험준비를 시작하셨네요"
+            } else if (score >= 20) {
+                "대중교통 이용에는 많은 장점이 있습니다!"
             } else {
                 point = 0
-                "대중교통 이용에는 많은 장점이 있습니다!"
+                "심심풀이로 오셨군요!"
             }
         result_point.text = "포인트 ${point} 획득!"
         result_detail.text = "${quiz_amount}문제 중 ${quiz_correct}문제 정답"
@@ -76,6 +76,10 @@ class ResultActivity : AppCompatActivity() {
 
         var sf: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(applicationContext)
         sf.edit().run {
+            putInt(
+                "HighScore",
+                if (sf.getInt("HighScore", 0) < score) score else sf.getInt("HighScore", 0)
+            )
             putInt("Point", sf.getInt("Point", 0) + point)
             apply()
         }
@@ -105,7 +109,8 @@ class ResultActivity : AppCompatActivity() {
                                 R.drawable.gradient_copper
                             }
 
-                        }
+                        },
+                "D " + SimpleDateFormat("yyyy년 MM월 dd일 HH:mm").format(Date())
             )
             putStringSet(SimpleDateFormat("yyyyMMdd-HHmmss").format(Date()), list)
             apply()

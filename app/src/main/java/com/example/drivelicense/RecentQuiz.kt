@@ -7,6 +7,8 @@ import android.support.v7.widget.LinearLayoutManager
 import com.example.drivelicense.scorecard.ScoreCard
 import com.example.drivelicense.scorecard.ScoreCardAdapter
 import kotlinx.android.synthetic.main.activity_recent_quiz.*
+import kotlinx.android.synthetic.main.scorecard.*
+import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -23,7 +25,7 @@ class RecentQuiz : AppCompatActivity() {
         for(data in datas.all.toSortedMap()) {
             var value = (data.value as MutableSet<String>)
             var iterator = value.iterator()
-            scorecard = ScoreCard(0, 0, 0, 0)
+            scorecard = ScoreCard(0, 0, 0, 0, "1970년 1월 1일 21:45")
             while(iterator.hasNext()) {
                 var now = iterator.next()
                 if(now.startsWith("S")) {
@@ -40,6 +42,10 @@ class RecentQuiz : AppCompatActivity() {
 
                 if (now.startsWith("B")) {
                     scorecard.gradient_id = now.split("B ")[1].toInt()
+                }
+
+                if (now.startsWith("D")) {
+                    scorecard.date = now.split("D ")[1]
                 }
             }
             if (scorecard.gradient_id == 0) {

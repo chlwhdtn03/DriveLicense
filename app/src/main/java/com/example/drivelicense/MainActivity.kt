@@ -108,7 +108,7 @@ class MainActivity : AppCompatActivity() {
 
 
         versionInfo.setOnClickListener {
-            CustomToast.makeToast(this, "최소 SDK 버전 : ${applicationContext.applicationInfo.minSdkVersion}\n시험 문제 : 2020 최신")
+            CustomToast.makeToast(this, "[2020년 2월 10일 시행]\n1종 2종 학과시험 문제은행")
         }
 
         viewpdf.setOnClickListener {
@@ -135,7 +135,7 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() { // 액티비티가 맨 앞으로 올때
         super.onResume()
         var sf : SharedPreferences = PreferenceManager.getDefaultSharedPreferences(applicationContext)
-        myPoint.text = String.format("%,d 포인트", sf.getInt("Point", 0))
+        myPoint.text = String.format("%,d 점", sf.getInt("HighScore", 0))
     }
 
     fun loadQuiz(isHintEnable: Boolean) {

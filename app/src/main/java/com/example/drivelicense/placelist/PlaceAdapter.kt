@@ -22,6 +22,7 @@ class PlaceAdapter(val context: Context, val list: ArrayList<Place>) :
         val expandLayout = itemView.place_expandLayout
         val info = itemView.place_info
 
+
         fun bind(data: Place, context: Context) {
             name.text = if (data.isPersonalPlace) data.name + "운전면허 전문학원" else data.name.replace(
                 " ",

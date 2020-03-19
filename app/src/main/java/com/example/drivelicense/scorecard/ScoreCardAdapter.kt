@@ -18,32 +18,38 @@ class ScoreCardAdapter(val context:Context, val list: ArrayList<ScoreCard>) : Re
         val correct_amount = itemView.quiz_correct
         val quiz_tip = itemView.quiz_tip
         val background = itemView.cardbackground
+        val date = itemView.date
 
         fun bind(data: ScoreCard, context: Context) {
             score.text = "${data.score} 점"
             quiz_amount.text = "${data.quiz_amount}문제 중"
             correct_amount.text = "${data.correct_amount}문제 정답"
+            date.text = data.date
             quiz_tip.text =
-                if(data.score > 90) {
+                if (data.score >= 90) {
                     "무조건 합격하실 수 있을겁니다!"
-                } else if(data.score  > 80) {
+                } else if (data.score >= 80) {
                     "1,2종 모두 합격을 예상합니다!"
-                } else if(data.score  > 70) {
-                    "1,2종 보통 합격할 수도 있습니다.(강남운전면허연습장 한정)"
-                } else if(data.score  > 60) {
+                } else if (data.score >= 70) {
+                    "나머지 10점은 운에 맡겨봅시다!"
+                } else if (data.score >= 60) {
                     "2종 보통이라면 합격할 수도 있습니다.\n(강남운전면허연습장 한정)"
-                } else if(data.score  > 50) {
+                } else if (data.score >= 50) {
                     "좀만 더 연습하세요"
-                } else {
+                } else if (data.score >= 30) {
+                    "이제 막 시험준비를 시작하셨네요"
+                } else if (data.score >= 20) {
                     "대중교통 이용에는 많은 장점이 있습니다!"
+                } else {
+                    "심심풀이로 오셨군요!"
                 }
-            background.setBackgroundResource(data.gradient_id)
+//            background.setBackgroundResource(data.gradient_id) // 배경색
         }
 
     }
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): Holder {
-        var view = LayoutInflater.from(context).inflate(R.layout.scorecard, null, false)
+        var view = LayoutInflater.from(context).inflate(R.layout.scorecard, p0, false)
         return Holder(view)
 
     }

@@ -23,6 +23,8 @@ class QuizActivity : AppCompatActivity() {
 
     var isHint: Boolean = false
 
+    var quitLeft: Int = 5;
+
     var isReadOnly: Boolean = false
     var isViewOnly: Boolean = false
     var page: Int = 2
@@ -31,7 +33,10 @@ class QuizActivity : AppCompatActivity() {
         if (isReadOnly || isViewOnly) {
             super.onBackPressed()
         } else {
-            CustomToast.makeToast(this, "뒤로갈 수 없습니다")
+            if (quitLeft != 0)
+                CustomToast.makeToast(this, "${quitLeft--}번 더 누르면 뒤로갑니다")
+            else
+                super.onBackPressed()
         }
     }
 
@@ -209,7 +214,7 @@ class QuizActivity : AppCompatActivity() {
 
     fun initScreen(quiz: Quiz) {
 
-        quiz_num.text = quiz.id.toString() + "번 문제"
+        quiz_num.text = "문제은행 " + quiz.id.toString() + "번 문제"
         quiz_title.text = quiz.title
         question_box.removeAllViewsInLayout()
 
