@@ -7,7 +7,7 @@ apply plugin: 'kotlin-android-extensions'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.example.drivelicense"
+        applicationId "com.chlwhdtn.drivelicense"
         minSdkVersion 24
         targetSdkVersion 28
         versionCode 1

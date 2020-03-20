@@ -4,13 +4,18 @@
     <!-- 체크박스 해제상태 -->
     <item android:state_checked="false">
     <layer-list>
-        <item android:width="@dimen/checkbox_w" android:height="@dimen/checkbox_h" android:drawable="@drawable/incorrect"/>
+        <item android:width="@dimen/checkbox_w" android:height="@dimen/checkbox_h" android:drawable="@drawable/incorrect">
+
+        </item>
+
     </layer-list>
     </item>
     <!-- 체크박스 선택상태 -->
     <item android:state_checked="true">
         <layer-list>
-            <item android:width="@dimen/checkbox_w" android:height="@dimen/checkbox_h" android:drawable="@drawable/correct"/>
+            <item android:width="@dimen/checkbox_w" android:height="@dimen/checkbox_h" android:drawable="@drawable/correct">
+
+            </item>
         </layer-list>
     </item>
 

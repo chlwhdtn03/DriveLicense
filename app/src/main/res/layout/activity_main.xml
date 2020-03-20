@@ -49,6 +49,7 @@
         app:cardElevation="15dp"
         android:layout_marginBottom="-15dp">
         <LinearLayout
+            android:background="#FFFFFF"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="20dp"
@@ -73,7 +74,7 @@
                     android:gravity="right"
                     android:text="0"
                     android:fontFamily="@font/font"
-                    android:textColor="#FF1818"
+                    android:textColor="#4CAF50"
                     android:textSize="15sp" />
             </LinearLayout>
 
@@ -86,7 +87,7 @@
                 android:gravity="bottom"
                 android:weightSum="3">
 
-                <com.example.drivelicense.custom.CustomIconMenu
+                <com.chlwhdtn.drivelicense.custom.CustomIconMenu
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -96,7 +97,7 @@
                     android:id="@+id/recent_quiz"
                     app:textColor="#000000"/>
 
-                <com.example.drivelicense.custom.CustomIconMenu
+                <com.chlwhdtn.drivelicense.custom.CustomIconMenu
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -106,7 +107,7 @@
                     app:image="@drawable/viewpdf"
                     app:textColor="#000000"/>
 
-                <com.example.drivelicense.custom.CustomIconMenu
+                <com.chlwhdtn.drivelicense.custom.CustomIconMenu
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

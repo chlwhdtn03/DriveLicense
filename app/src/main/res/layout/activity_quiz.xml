@@ -25,16 +25,24 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/font"
-                    android:text="1번 문제"
+                    android:weightSum="5">
 
-                    android:textSize="25sp"
-                    android:layout_margin="15dp"
-                    android:textColor="#404961"
-                    android:id="@+id/quiz_num" />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/font"
+                        android:text="1번 문제"
+                        android:layout_weight="4"
+                        android:textSize="25sp"
+                        android:layout_margin="15dp"
+                        android:textColor="#404961"
+                        android:id="@+id/quiz_num" />
+
+                </LinearLayout>
+
 
                 <TextView
                     android:layout_width="match_parent"

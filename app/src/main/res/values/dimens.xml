@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="checkbox_w">24dp</dimen>
-    <dimen name="checkbox_h">30dp</dimen>
+    <dimen name="checkbox_h">24dp</dimen>
 </resources>
